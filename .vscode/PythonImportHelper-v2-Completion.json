@@ -1,0 +1,231 @@
+[
+    {
+        "label": "train_test_split",
+        "importPath": "surprise.model_selection",
+        "description": "surprise.model_selection",
+        "isExtraImport": true,
+        "detail": "surprise.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "Dataset",
+        "importPath": "surprise",
+        "description": "surprise",
+        "isExtraImport": true,
+        "detail": "surprise",
+        "documentation": {}
+    },
+    {
+        "label": "Reader",
+        "importPath": "surprise",
+        "description": "surprise",
+        "isExtraImport": true,
+        "detail": "surprise",
+        "documentation": {}
+    },
+    {
+        "label": "KNNBasic",
+        "importPath": "surprise",
+        "description": "surprise",
+        "isExtraImport": true,
+        "detail": "surprise",
+        "documentation": {}
+    },
+    {
+        "label": "accuracy",
+        "importPath": "surprise",
+        "description": "surprise",
+        "isExtraImport": true,
+        "detail": "surprise",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "get_map",
+        "kind": 2,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "def get_map(user_list):\n  precision_list = []\n  for user in user_list:\n    predictive_values = user[1]\n    actual_values = set(user[2])\n    tp = [pv for pv in predictive_values if pv in actual_values]\n    precision = len(tp) / len(predictive_values)\n    precision_list.append(precision)\n  return sum(precision_list) / len(precision_list)\nget_map(user_metric)",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "get_map_topk",
+        "kind": 2,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "def get_map_topk(k):\n  user_metric = []\n  for user in estimated_unwatched_dict:\n    estimated_list = estimated_unwatched_dict[user].copy()\n    estimated_list.sort(key=lambda tup: tup[1], reverse=True)\n    try:\n      top_k_prefer_list = [movie[0] for movie in estimated_list[:k]]\n      actual_watch_list = user_watch_dict_list_test[user_watch_dict_list_test.index==user].values.tolist()[0]\n      user_metric.append((user, top_k_prefer_list, actual_watch_list))\n    except:",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "rating_url",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "rating_url = './data/ratings.dat'\nrating_df = pd.io.parsers.read_csv(rating_url, names=[\n                                   'user_id', 'movie_id', 'rating', 'time'], delimiter='::', engine='python')\nmovie_url = './data/movies.dat'\nmovie_df = pd.io.parsers.read_csv(movie_url, names=[\n                                  'movie_id', 'title', 'genre'], delimiter='::', engine='python', encoding='ISO-8859-1')\n# 데이터 확인\n# print(rating_df)\n# print(movie_df)\n# print(len(rating_df['user_id'].unique()))",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "rating_df",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "rating_df = pd.io.parsers.read_csv(rating_url, names=[\n                                   'user_id', 'movie_id', 'rating', 'time'], delimiter='::', engine='python')\nmovie_url = './data/movies.dat'\nmovie_df = pd.io.parsers.read_csv(movie_url, names=[\n                                  'movie_id', 'title', 'genre'], delimiter='::', engine='python', encoding='ISO-8859-1')\n# 데이터 확인\n# print(rating_df)\n# print(movie_df)\n# print(len(rating_df['user_id'].unique()))\n# print(len(rating_df['movie_id'].unique()))",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "movie_url",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "movie_url = './data/movies.dat'\nmovie_df = pd.io.parsers.read_csv(movie_url, names=[\n                                  'movie_id', 'title', 'genre'], delimiter='::', engine='python', encoding='ISO-8859-1')\n# 데이터 확인\n# print(rating_df)\n# print(movie_df)\n# print(len(rating_df['user_id'].unique()))\n# print(len(rating_df['movie_id'].unique()))\n# print(rating_df['rating'].hist())\n# 트레인 셋, 데이터셋 분리",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "movie_df",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "movie_df = pd.io.parsers.read_csv(movie_url, names=[\n                                  'movie_id', 'title', 'genre'], delimiter='::', engine='python', encoding='ISO-8859-1')\n# 데이터 확인\n# print(rating_df)\n# print(movie_df)\n# print(len(rating_df['user_id'].unique()))\n# print(len(rating_df['movie_id'].unique()))\n# print(rating_df['rating'].hist())\n# 트레인 셋, 데이터셋 분리\nreader = Reader(rating_scale=(1, 5))",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "reader",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "reader = Reader(rating_scale=(1, 5))\ndata = Dataset.load_from_df(\n    rating_df[['user_id', 'movie_id', 'rating']], reader)\ntrainset, testset = train_test_split(data, test_size=.25)\nalgo = KNNBasic(k=40, min_k=1, sim_options={\n                \"user_based\": True, \"name\": \"cosine\"})\nalgo.fit(trainset)\npredictions = algo.test(testset)\n# 모델 평가 RMSE\naccuracy.rmse(predictions)",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "data",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "data = Dataset.load_from_df(\n    rating_df[['user_id', 'movie_id', 'rating']], reader)\ntrainset, testset = train_test_split(data, test_size=.25)\nalgo = KNNBasic(k=40, min_k=1, sim_options={\n                \"user_based\": True, \"name\": \"cosine\"})\nalgo.fit(trainset)\npredictions = algo.test(testset)\n# 모델 평가 RMSE\naccuracy.rmse(predictions)\npredictions = algo.test(testset[:20])",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "algo",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "algo = KNNBasic(k=40, min_k=1, sim_options={\n                \"user_based\": True, \"name\": \"cosine\"})\nalgo.fit(trainset)\npredictions = algo.test(testset)\n# 모델 평가 RMSE\naccuracy.rmse(predictions)\npredictions = algo.test(testset[:20])\nfor _, iid, r_ui, predicted_rating, _ in predictions:\n    print(\"Item id\", iid, \"|\", \"real rating :\", r_ui,\n          \"|\", \"predicted rating :\", predicted_rating)",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "predictions",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "predictions = algo.test(testset)\n# 모델 평가 RMSE\naccuracy.rmse(predictions)\npredictions = algo.test(testset[:20])\nfor _, iid, r_ui, predicted_rating, _ in predictions:\n    print(\"Item id\", iid, \"|\", \"real rating :\", r_ui,\n          \"|\", \"predicted rating :\", predicted_rating)\n# 4점 이상을 준 test 시청리스트 추출\nuser_watch_dict_list_test = test_df[test_df['rating']>=4].groupby('user_id')[['user_id', 'movie_id']].apply(lambda x: x['movie_id'].tolist())\nuser_metric = []",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "predictions",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "predictions = algo.test(testset[:20])\nfor _, iid, r_ui, predicted_rating, _ in predictions:\n    print(\"Item id\", iid, \"|\", \"real rating :\", r_ui,\n          \"|\", \"predicted rating :\", predicted_rating)\n# 4점 이상을 준 test 시청리스트 추출\nuser_watch_dict_list_test = test_df[test_df['rating']>=4].groupby('user_id')[['user_id', 'movie_id']].apply(lambda x: x['movie_id'].tolist())\nuser_metric = []\n# 유저별 k개의 선호 리스트 추출\nk = 3\nfor user in estimated_unwatched_dict:",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "user_watch_dict_list_test",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "user_watch_dict_list_test = test_df[test_df['rating']>=4].groupby('user_id')[['user_id', 'movie_id']].apply(lambda x: x['movie_id'].tolist())\nuser_metric = []\n# 유저별 k개의 선호 리스트 추출\nk = 3\nfor user in estimated_unwatched_dict:\n  estimated_list = estimated_unwatched_dict[user].copy()\n  estimated_list.sort(key=lambda tup: tup[1], reverse=True)\n  try:\n    top_k_prefer_list = [movie[0] for movie in estimated_list[:k]]\n    actual_watch_list = user_watch_dict_list_test[int(user)]",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "user_metric",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "user_metric = []\n# 유저별 k개의 선호 리스트 추출\nk = 3\nfor user in estimated_unwatched_dict:\n  estimated_list = estimated_unwatched_dict[user].copy()\n  estimated_list.sort(key=lambda tup: tup[1], reverse=True)\n  try:\n    top_k_prefer_list = [movie[0] for movie in estimated_list[:k]]\n    actual_watch_list = user_watch_dict_list_test[int(user)]\n    user_metric.append((user, top_k_prefer_list, actual_watch_list))",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "k",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "k = 3\nfor user in estimated_unwatched_dict:\n  estimated_list = estimated_unwatched_dict[user].copy()\n  estimated_list.sort(key=lambda tup: tup[1], reverse=True)\n  try:\n    top_k_prefer_list = [movie[0] for movie in estimated_list[:k]]\n    actual_watch_list = user_watch_dict_list_test[int(user)]\n    user_metric.append((user, top_k_prefer_list, actual_watch_list))\n  except:\n    print(\"list index out of range, exclude user \" + str(user))",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "predictive_values",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "predictive_values = user_metric[0][1]\nactual_values = set(user_metric[0][2])\ntp = [pv for pv in predictive_values if pv in actual_values]\nlen(tp) / len(predictive_values)\ndef get_map(user_list):\n  precision_list = []\n  for user in user_list:\n    predictive_values = user[1]\n    actual_values = set(user[2])\n    tp = [pv for pv in predictive_values if pv in actual_values]",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "actual_values",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "actual_values = set(user_metric[0][2])\ntp = [pv for pv in predictive_values if pv in actual_values]\nlen(tp) / len(predictive_values)\ndef get_map(user_list):\n  precision_list = []\n  for user in user_list:\n    predictive_values = user[1]\n    actual_values = set(user[2])\n    tp = [pv for pv in predictive_values if pv in actual_values]\n    precision = len(tp) / len(predictive_values)",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "tp",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "tp = [pv for pv in predictive_values if pv in actual_values]\nlen(tp) / len(predictive_values)\ndef get_map(user_list):\n  precision_list = []\n  for user in user_list:\n    predictive_values = user[1]\n    actual_values = set(user[2])\n    tp = [pv for pv in predictive_values if pv in actual_values]\n    precision = len(tp) / len(predictive_values)\n    precision_list.append(precision)",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "k_param_list",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "k_param_list = range(1,30)\nmap_list = []\nfor k in k_param_list:    \n  map_list.append(get_map_topk(k))\nplt.plot(k_param_list, map_list)\nplt.title('MAP by top k recommendation')\nplt.ylabel('MAP', fontsize=12)\nplt.xlabel('k', fontsize=12)\nplt.show()",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "map_list",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "map_list = []\nfor k in k_param_list:    \n  map_list.append(get_map_topk(k))\nplt.plot(k_param_list, map_list)\nplt.title('MAP by top k recommendation')\nplt.ylabel('MAP', fontsize=12)\nplt.xlabel('k', fontsize=12)\nplt.show()",
+        "detail": "test",
+        "documentation": {}
+    }
+]
